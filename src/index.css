@@ -2073,14 +2073,31 @@ section[id] {
   padding: 0.75rem;
   display: grid;
 }
-.contact-links > a {
+.contact-links > a,
+.contact-links > div {
   transition:
-    transform 0.2s,
-    border-color 0.2s;
+    transform .22s ease,
+    border-color .22s ease,
+    background .22s ease,
+    box-shadow .22s ease;
 }
-.contact-links > a:hover {
-  border-color: var(--accent);
-  transform: translate(4px);
+@media (hover: hover) and (pointer: fine) {
+  .contact-links > a:hover,
+  .contact-links > a:focus-visible,
+  .contact-links > div:hover {
+    border-color: var(--accent);
+    background: var(--surface-solid);
+    box-shadow:
+      0 16px 42px #00000052,
+      0 0 0 1px var(--accent-soft),
+      0 0 28px #4adba91c;
+    transform: translateX(4px);
+  }
+  .contact-links > a:hover > span,
+  .contact-links > a:focus-visible > span,
+  .contact-links > div:hover > span {
+    box-shadow: 0 0 22px #4adba93d;
+  }
 }
 .contact-links > * > span {
   background: var(--accent-soft);
