@@ -1196,6 +1196,38 @@ section[id] {
   padding-top: 128px;
   padding-bottom: 76px;
   display: grid;
+  isolation: isolate;
+  overflow: hidden;
+}
+.hero-video-layer {
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 2rem;
+  position: absolute;
+  inset: 112px 1rem 24px 42%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
+}
+.hero-video-layer:after {
+  content: '';
+  background:
+    linear-gradient(90deg, var(--bg) 0%, transparent 42%),
+    linear-gradient(180deg, var(--bg) 0%, transparent 22%, transparent 72%, var(--bg) 100%),
+    radial-gradient(circle at 68% 42%, transparent 0%, var(--bg) 82%);
+  position: absolute;
+  inset: 0;
+}
+.hero-video-layer video {
+  width: 100%;
+  height: 100%;
+  opacity: .12;
+  object-fit: cover;
+  object-position: 50% 38%;
+  filter: grayscale(.2) saturate(.72) contrast(1.18) hue-rotate(82deg);
+}
+.dark .hero-video-layer video {
+  opacity: .23;
 }
 .hero-copy {
   z-index: 2;
@@ -1312,6 +1344,7 @@ section[id] {
   background: var(--accent-soft);
 }
 .hero-card-wrap {
+  z-index: 2;
   justify-self: end;
   width: 100%;
   max-width: 430px;
@@ -1522,6 +1555,7 @@ section[id] {
   transform: translate(-50%, 0);
 }
 .scroll-cue {
+  z-index: 2;
   color: var(--muted);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -2113,6 +2147,9 @@ footer {
   .contact-section {
     padding-inline: 1.25rem;
   }
+}
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .hero-video-layer { display: none; }
 }
 @media (max-width: 600px) {
   .nav-brand {

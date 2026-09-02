@@ -8,6 +8,8 @@ Update `src/data/portfolio.ts` to change personal information, skills, experienc
 
 The downloadable resume is stored at `public/resume/Nitish-Kumar-Singh-Resume.pdf`.
 
+The hero background uses the free Pexels clip “Zoom In Video of a Robot” by Pavel Danilyuk, stored locally at `public/media/robot-background.mp4` and presented with a custom color and readability treatment.
+
 ## Local development
 
 ```bash
