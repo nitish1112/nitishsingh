@@ -1,5 +1,7 @@
 'use client';
 
+/* oxlint-disable next/no-img-element -- This is a Vite app; the local hero image is explicitly sized and eagerly loaded. */
+
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import {
   ArrowDownRight,
@@ -173,8 +175,16 @@ function Hero() {
         <div className="profile-glow" />
         <div className="glass profile-card">
           <div className="window-bar"><span><i /><i /><i /></span><small>PROFILE.TSX</small></div>
-          <div className="profile-placeholder" aria-label="Profile image placeholder for Nitish Kumar Singh">
-            <span>{portfolio.personal.initials}</span><small>Profile image placeholder</small>
+          <div className="profile-placeholder profile-photo-frame">
+            <img
+              src="/profile1.jpeg"
+              alt="Nitish Kumar Singh"
+              className="profile-photo"
+              width="603"
+              height="821"
+              loading="eager"
+              fetchPriority="high"
+            />
           </div>
           <div className="profile-content">
             <span className="status-pill"><i /> Open to professional opportunities</span>

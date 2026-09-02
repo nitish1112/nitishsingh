@@ -38,3 +38,5 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+public/profile.PNG
+public/profile2.jpeg

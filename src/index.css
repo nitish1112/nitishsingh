@@ -1525,6 +1525,40 @@ section[id] {
   text-transform: uppercase;
   font-size: 0.63rem;
 }
+.profile-photo-frame {
+  height: 330px;
+  min-height: 0;
+  display: block;
+  position: relative;
+  isolation: isolate;
+}
+.profile-photo-frame:after {
+  content: '';
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, #0807110d 50%, #080711b8 100%),
+    radial-gradient(circle at 50% 42%, transparent 42%, #08071170 100%);
+  position: absolute;
+  inset: 0;
+}
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 39%;
+  filter: saturate(.7) contrast(1.04) brightness(.9);
+  transform: scale(1.035);
+  transform-origin: 58% 42%;
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1), filter .35s ease;
+  display: block;
+}
+@media (hover: hover) and (pointer: fine) {
+  .profile-card:hover .profile-photo {
+    filter: saturate(.8) contrast(1.05) brightness(.94);
+    transform: scale(1.08);
+  }
+}
 .profile-content {
   padding: 1.2rem 0.8rem 0.75rem;
 }
