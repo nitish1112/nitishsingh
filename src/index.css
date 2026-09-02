@@ -1032,6 +1032,52 @@ a {
   box-shadow: var(--shadow);
   -webkit-backdrop-filter: blur(18px);
 }
+.profile-card,
+.about-story,
+.note-card,
+.skill-card,
+.experience-card,
+.education-card,
+.certification-card,
+.contact-form-card {
+  transition:
+    transform .28s cubic-bezier(.22, 1, .36, 1),
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .profile-card:hover,
+  .about-story:hover,
+  .note-card:hover,
+  .skill-card:hover,
+  .experience-card:hover,
+  .education-card:hover,
+  .certification-card:hover,
+  .contact-form-card:hover,
+  .contact-form-card:focus-within {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #17231fd9, #111322e6);
+    box-shadow:
+      0 26px 80px #00000070,
+      0 0 0 1px var(--accent-soft),
+      0 0 36px #4adba917,
+      inset 0 1px #ffffff12;
+    transform: translateY(-3px);
+  }
+  .note-card:hover strong,
+  .skill-card:hover h3,
+  .experience-card:hover h3,
+  .education-card:hover h3,
+  .certification-card:hover h3,
+  .profile-card:hover h2 {
+    color: var(--accent);
+  }
+  .skill-card:hover .icon-box,
+  .education-card:hover .education-top > svg {
+    filter: drop-shadow(0 0 10px var(--accent));
+  }
+}
 main,
 footer {
   z-index: 1;
