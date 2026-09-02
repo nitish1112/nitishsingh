@@ -12,6 +12,15 @@ export const portfolio = {
     summary:
       'IT graduate specializing in networking and mobile application development, with hands-on experience designing and developing mobile applications at Digit Nepal. Skilled in troubleshooting, subnetting, virtualization, basic network security, and cross-functional UI/UX collaboration.',
   },
+  socialLinks: [
+    { label: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/share/1D3qmjGnv7/?mibextid=wwXIfr' },
+    { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/nitish_cng?igsi=MWw3bHNwaXNxMXcxcA%3D%3D&utm_source=qr' },
+    { label: 'Gmail', icon: 'gmail', url: 'mailto:nitishsingh32211@gmail.com' },
+    { label: 'Snapchat', icon: 'snapchat', url: 'https://snapchat.com/t/svlS2DkY' },
+    { label: 'WhatsApp', icon: 'whatsapp', url: 'https://wa.me/+9779862241112' },
+    { label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/in/nitish-kumar-singh-51a598358?utm_source=share_via&utm_content=profile&utm_medium=member_ios' },
+    { label: 'GitHub', icon: 'github', url: 'https://github.com/nitish1112' },
+  ],
   navigation: [
     { label: 'About', id: 'about' },
     { label: 'Skills', id: 'skills' },

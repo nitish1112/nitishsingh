@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import {
   ArrowDownRight,
   ArrowUp,
@@ -23,6 +23,8 @@ import {
   X,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn, FaSnapchatGhost, FaWhatsapp } from 'react-icons/fa';
+import { SiGmail } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -30,6 +32,75 @@ import { portfolio } from '@/src/data/portfolio';
 import { Reveal } from './Reveal';
 
 const skillIcons = [Smartphone, Network, Wrench, Layers3];
+const socialIcons = {
+  facebook: FaFacebookF,
+  instagram: FaInstagram,
+  gmail: SiGmail,
+  snapchat: FaSnapchatGhost,
+  whatsapp: FaWhatsapp,
+  linkedin: FaLinkedinIn,
+  github: FaGithub,
+};
+
+function SocialDock() {
+  return (
+    <nav className="social-dock" aria-label="Social profiles">
+      {portfolio.socialLinks.map((social) => {
+        const Icon = socialIcons[social.icon];
+        const external = !social.url.startsWith('mailto:');
+        return (
+          <a
+            key={social.label}
+            href={social.url}
+            aria-label={`Open ${social.label}`}
+            title={social.label}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noreferrer' : undefined}
+            data-cursor="social"
+          >
+            <Icon aria-hidden="true" />
+            <span>{social.label}</span>
+          </a>
+        );
+      })}
+    </nav>
+  );
+}
+
+function CursorFollower() {
+  const reduceMotion = useReducedMotion();
+  const x = useMotionValue(-50);
+  const y = useMotionValue(-50);
+  const springX = useSpring(x, { stiffness: 560, damping: 34, mass: .18 });
+  const springY = useSpring(y, { stiffness: 560, damping: 34, mass: .18 });
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    const onMove = (event: PointerEvent) => { x.set(event.clientX); y.set(event.clientY); };
+    const onOver = (event: PointerEvent) => setActive(Boolean((event.target as Element).closest('a, button')));
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerover', onOver, { passive: true });
+    return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerover', onOver); };
+  }, [reduceMotion, x, y]);
+
+  if (reduceMotion) return null;
+  return <motion.div className={`cursor-follower${active ? ' is-active' : ''}`} style={{ x: springX, y: springY }} aria-hidden="true"><i /></motion.div>;
+}
+
+function InteractiveBackdrop() {
+  const reduceMotion = useReducedMotion();
+  useEffect(() => {
+    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    const onMove = (event: PointerEvent) => {
+      document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
+      document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    return () => window.removeEventListener('pointermove', onMove);
+  }, [reduceMotion]);
+  return <div className="site-background" aria-hidden="true"><i className="ambient-orb orb-one" /><i className="ambient-orb orb-two" /><i className="ambient-orb orb-three" /></div>;
+}
 
 function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) {
   return (
@@ -111,6 +182,7 @@ function Hero() {
             <h2>{portfolio.personal.name}</h2>
             <p>{portfolio.personal.title} <span>·</span> {portfolio.personal.secondaryTitle}</p>
             <div className="profile-location"><MapPin /> {portfolio.personal.location}</div>
+            <SocialDock />
           </div>
         </div>
       </motion.aside>
@@ -284,7 +356,8 @@ export function PortfolioPage() {
     <>
       <AnimatePresence>{loading && <motion.div className="page-loader" exit={{ opacity: 0 }} transition={{ duration: .35 }}><motion.div initial={{ scale: .75, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}><span>NS</span><i /></motion.div></motion.div>}</AnimatePresence>
       <motion.div className="scroll-progress" style={{ scaleX: progress }} />
-      <div className="site-background" aria-hidden="true" />
+      <InteractiveBackdrop />
+      <CursorFollower />
       <Navbar activeSection={activeSection} dark={dark} onTheme={toggleTheme} />
       <main><Hero /><About /><Skills /><Experience /><Education /><Certification /><Contact /></main>
       <footer><span>© {new Date().getFullYear()} {portfolio.personal.name}</span><span>Designed for clarity. Built for growth.</span></footer>
