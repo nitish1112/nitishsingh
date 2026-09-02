@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useSpring } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import {
   ArrowDownRight,
   ArrowUp,
@@ -65,27 +65,6 @@ function SocialDock() {
       })}
     </nav>
   );
-}
-
-function CursorFollower() {
-  const reduceMotion = useReducedMotion();
-  const x = useMotionValue(-50);
-  const y = useMotionValue(-50);
-  const springX = useSpring(x, { stiffness: 560, damping: 34, mass: .18 });
-  const springY = useSpring(y, { stiffness: 560, damping: 34, mass: .18 });
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
-    const onMove = (event: PointerEvent) => { x.set(event.clientX); y.set(event.clientY); };
-    const onOver = (event: PointerEvent) => setActive(Boolean((event.target as Element).closest('a, button')));
-    window.addEventListener('pointermove', onMove, { passive: true });
-    window.addEventListener('pointerover', onOver, { passive: true });
-    return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerover', onOver); };
-  }, [reduceMotion, x, y]);
-
-  if (reduceMotion) return null;
-  return <motion.div className={`cursor-follower${active ? ' is-active' : ''}`} style={{ x: springX, y: springY }} aria-hidden="true"><i /></motion.div>;
 }
 
 function InteractiveBackdrop() {
@@ -357,7 +336,6 @@ export function PortfolioPage() {
       <AnimatePresence>{loading && <motion.div className="page-loader" exit={{ opacity: 0 }} transition={{ duration: .35 }}><motion.div initial={{ scale: .75, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}><span>NS</span><i /></motion.div></motion.div>}</AnimatePresence>
       <motion.div className="scroll-progress" style={{ scaleX: progress }} />
       <InteractiveBackdrop />
-      <CursorFollower />
       <Navbar activeSection={activeSection} dark={dark} onTheme={toggleTheme} />
       <main><Hero /><About /><Skills /><Experience /><Education /><Certification /><Contact /></main>
       <footer><span>© {new Date().getFullYear()} {portfolio.personal.name}</span><span>Designed for clarity. Built for growth.</span></footer>

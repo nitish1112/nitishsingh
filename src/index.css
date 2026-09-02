@@ -975,34 +975,6 @@ a {
 @keyframes ambient-float {
   to { transform: translate3d(2.5rem, -2rem, 0) rotate(10deg); }
 }
-.cursor-follower {
-  z-index: 160;
-  width: 30px;
-  height: 30px;
-  pointer-events: none;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  place-items: center;
-  display: grid;
-  position: fixed;
-  top: -15px;
-  left: -15px;
-  transition: width .18s, height .18s, top .18s, left .18s, background .18s, border-color .18s;
-}
-.cursor-follower i {
-  width: 4px;
-  height: 4px;
-  background: var(--accent);
-  border-radius: 50%;
-}
-.cursor-follower.is-active {
-  width: 46px;
-  height: 46px;
-  top: -23px;
-  left: -23px;
-  background: var(--accent-soft);
-  border-color: var(--accent-2);
-}
 @supports (color: color-mix(in lab, red, red)) {
   .site-background {
     background-image:
@@ -2225,7 +2197,6 @@ footer {
   }
 }
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  .cursor-follower { display: none; }
   .ambient-orb { animation: none; }
   .site-background:after { display: none; }
 }
