@@ -1228,14 +1228,14 @@ section[id] {
 }
 .hero {
   grid-template-columns: minmax(0, 1.25fr) minmax(340px, 0.75fr);
-  align-items: center;
+  align-items: start;
   gap: clamp(3rem, 7vw, 7rem);
   min-height: 100svh;
   padding-top: 128px;
   padding-bottom: 76px;
   display: grid;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
 }
 .hero-copy {
   z-index: 2;
@@ -1283,13 +1283,13 @@ section[id] {
   font-size: 0.82rem;
 }
 .hero h1 {
-  letter-spacing: -0.074em;
+  letter-spacing: -0.064em;
   text-wrap: balance;
   max-width: 850px;
   margin: 0;
   font-size: clamp(3.7rem, 7vw, 7.7rem);
   font-weight: 650;
-  line-height: 0.91;
+  line-height: 0.96;
   text-shadow: 0 4px 34px var(--bg);
 }
 .hero h1 em {
@@ -1298,6 +1298,9 @@ section[id] {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding-right: .1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   font-style: normal;
 }
 .hero-intro {
