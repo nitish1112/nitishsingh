@@ -69,16 +69,36 @@ function SocialDock() {
 
 function InteractiveBackdrop() {
   const reduceMotion = useReducedMotion();
+  const [showVideo, setShowVideo] = useState(false);
+
   useEffect(() => {
-    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    const videoMedia = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+    const syncVideo = () => setShowVideo(videoMedia.matches);
+    syncVideo();
+    videoMedia.addEventListener('change', syncVideo);
+    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) {
+      return () => videoMedia.removeEventListener('change', syncVideo);
+    }
     const onMove = (event: PointerEvent) => {
       document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
       document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
     };
     window.addEventListener('pointermove', onMove, { passive: true });
-    return () => window.removeEventListener('pointermove', onMove);
+    return () => {
+      videoMedia.removeEventListener('change', syncVideo);
+      window.removeEventListener('pointermove', onMove);
+    };
   }, [reduceMotion]);
-  return <div className="site-background" aria-hidden="true"><i className="ambient-orb orb-one" /><i className="ambient-orb orb-two" /><i className="ambient-orb orb-three" /></div>;
+  return (
+    <div className="site-background" aria-hidden="true">
+      {showVideo && (
+        <video className="site-video" autoPlay muted loop playsInline preload="metadata">
+          <source src="/media/ui-motion-background.mp4" type="video/mp4" />
+        </video>
+      )}
+      <i className="ambient-orb orb-one" /><i className="ambient-orb orb-two" /><i className="ambient-orb orb-three" />
+    </div>
+  );
 }
 
 function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) {
@@ -130,25 +150,8 @@ function Navbar({ activeSection, dark, onTheme }: { activeSection: string; dark:
 
 function Hero() {
   const reduceMotion = useReducedMotion();
-  const [showVideo, setShowVideo] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
-    const syncVideo = () => setShowVideo(media.matches);
-    syncVideo();
-    media.addEventListener('change', syncVideo);
-    return () => media.removeEventListener('change', syncVideo);
-  }, []);
-
   return (
     <section id="home" className="hero section-pad">
-      {showVideo && (
-        <div className="hero-video-layer" aria-hidden="true">
-          <video autoPlay muted loop playsInline preload="metadata">
-            <source src="/media/robot-background.mp4" type="video/mp4" />
-          </video>
-        </div>
-      )}
       <div className="hero-copy">
         <motion.div className="eyebrow" initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2 }}>
           <span className="pulse-dot" /> Mobile development · Networking

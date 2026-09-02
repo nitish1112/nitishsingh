@@ -936,8 +936,32 @@ a {
   inset: 0;
   overflow: hidden;
 }
+.site-background:before {
+  content: '';
+  z-index: 1;
+  background:
+    linear-gradient(180deg, var(--bg) 0%, transparent 16%, transparent 82%, var(--bg) 100%),
+    linear-gradient(90deg, var(--bg) 0%, transparent 34%, transparent 68%, var(--bg) 100%);
+  opacity: .82;
+  position: absolute;
+  inset: 0;
+}
+.site-video {
+  width: 100%;
+  height: 100%;
+  opacity: .08;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(.35) saturate(.72) contrast(1.14) hue-rotate(82deg);
+  position: absolute;
+  inset: 0;
+}
+.dark .site-video {
+  opacity: .16;
+}
 .site-background:after {
   content: '';
+  z-index: 2;
   background: radial-gradient(360px circle at var(--pointer-x) var(--pointer-y), var(--accent-soft), transparent 72%);
   opacity: 0.8;
   position: absolute;
@@ -945,6 +969,7 @@ a {
   transition: opacity 0.3s;
 }
 .ambient-orb {
+  z-index: 3;
   border: 1px solid var(--soft-line);
   border-radius: 50%;
   position: absolute;
@@ -998,8 +1023,6 @@ a {
     54px 54px,
     100% 100%,
     100% 100%;
-  -webkit-mask-image: linear-gradient(#000 0%, #000000b8 45%, #00000042 100%);
-  mask-image: linear-gradient(#000 0%, #000000b8 45%, #00000042 100%);
 }
 .glass {
   border: 1px solid var(--line);
@@ -1198,36 +1221,6 @@ section[id] {
   display: grid;
   isolation: isolate;
   overflow: hidden;
-}
-.hero-video-layer {
-  z-index: 0;
-  pointer-events: none;
-  border-radius: 2rem;
-  position: absolute;
-  inset: 112px 1rem 24px 42%;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
-}
-.hero-video-layer:after {
-  content: '';
-  background:
-    linear-gradient(90deg, var(--bg) 0%, transparent 42%),
-    linear-gradient(180deg, var(--bg) 0%, transparent 22%, transparent 72%, var(--bg) 100%),
-    radial-gradient(circle at 68% 42%, transparent 0%, var(--bg) 82%);
-  position: absolute;
-  inset: 0;
-}
-.hero-video-layer video {
-  width: 100%;
-  height: 100%;
-  opacity: .12;
-  object-fit: cover;
-  object-position: 50% 38%;
-  filter: grayscale(.2) saturate(.72) contrast(1.18) hue-rotate(82deg);
-}
-.dark .hero-video-layer video {
-  opacity: .23;
 }
 .hero-copy {
   z-index: 2;
@@ -2149,7 +2142,7 @@ footer {
   }
 }
 @media (max-width: 767px), (prefers-reduced-motion: reduce) {
-  .hero-video-layer { display: none; }
+  .site-video { display: none; }
 }
 @media (max-width: 600px) {
   .nav-brand {
