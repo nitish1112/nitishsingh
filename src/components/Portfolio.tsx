@@ -160,7 +160,7 @@ function Hero() {
         </motion.div>
         <motion.p className="hero-name" initial={reduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .3 }}>{portfolio.personal.name}</motion.p>
         <motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .36, ease: [0.22, 1, 0.36, 1] }}>
-          Building useful mobile experiences with a <em>systems mindset.</em>
+          Crafting seamless mobile experiences with a <em>systems-driven mindset.</em>
         </motion.h1>
         <motion.p className="hero-intro" initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .52 }}>
           {portfolio.personal.intro} Based in Kathmandu, I bring together application delivery, networking fundamentals, and collaborative problem-solving.
