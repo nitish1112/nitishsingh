@@ -1886,7 +1886,7 @@ section[id] {
 .contact-links svg {
   width: 18px;
 }
-.contact-links div div {
+.contact-links > * > div {
   gap: 0.15rem;
   display: grid;
 }
