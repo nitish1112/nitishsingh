@@ -74,7 +74,7 @@ function InteractiveBackdrop() {
   const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
-    const videoMedia = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+    const videoMedia = window.matchMedia('(prefers-reduced-motion: no-preference)');
     const syncVideo = () => setShowVideo(videoMedia.matches);
     syncVideo();
     videoMedia.addEventListener('change', syncVideo);
