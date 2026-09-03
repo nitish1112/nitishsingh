@@ -55,7 +55,7 @@ export const portfolio = {
     {
       role: 'Mobile Application Developer',
       company: 'Digit Nepal',
-      dates: 'Jun 2025 — Nov 2025',
+      dates: 'Jun 2025 — Feb 2026',
       focus: 'Mobile engineering internship experience',
       responsibilities: [
         'Designed and developed mobile applications.',
