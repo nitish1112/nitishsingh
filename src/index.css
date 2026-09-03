@@ -2281,16 +2281,6 @@ footer {
     padding-inline: 1.25rem;
   }
 }
-@media (max-width: 767px) {
-  .site-video {
-    opacity: .08;
-    filter: blur(5px) grayscale(.22) saturate(.62) contrast(1.02);
-    transform: scale(1.04);
-  }
-  .dark .site-video {
-    opacity: .16;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .site-video { display: none; }
 }
